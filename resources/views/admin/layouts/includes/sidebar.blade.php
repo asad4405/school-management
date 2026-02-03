@@ -2,7 +2,8 @@
     <div class="brand-logo">
         <a href="">
             <img src="{{ asset('public/admin/assets/vendors') }}/images/deskapp-logo.svg" alt="" class="dark-logo" />
-            <img src="{{ asset('public/admin/assets/vendors') }}/images/deskapp-logo-white.svg" alt="" class="light-logo" />
+            <img src="{{ asset('public/admin/assets/vendors') }}/images/deskapp-logo-white.svg" alt=""
+                class="light-logo" />
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>
@@ -18,13 +19,10 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-textarea-resize"></span><span class="mtext">Products</span>
+                        <span class="micon bi bi-people-fill"></span><span class="mtext">Admins</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="">Categories</a></li>
-                        <li><a href="">Create Product</a></li>
-                        <li><a href="">All Products</a></li>
-                        <li><a href="#">Print Barcode</a></li>
+                        <li><a href="{{ route('admin.list') }}">Admin List</a></li>
                     </ul>
                 </li>
                 <li>
