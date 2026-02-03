@@ -8,7 +8,7 @@
                     <h4 class="text-blue h4">Class Lists</h4>
                 </div>
                 <div class="pull-right">
-                    <a href="{{ route('admin.class.create') }}" class="btn btn-primary btn-sm scroll-click"><i
+                    <a href="{{ route('admin.section.create') }}" class="btn btn-primary btn-sm scroll-click"><i
                             class="fa fa-plus"></i> Create</a>
                 </div>
             </div>
@@ -23,17 +23,19 @@
                     <thead>
                         <tr>
                             <th class="table-plus datatable-nosort">SL</th>
-                            <th>Class Name</th>
+                            <th>Class </th>
+                            <th>Section </th>
                             <th>Status</th>
                             <th>Position</th>
                             <th class="datatable-nosort">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($classes as $value)
+                        @foreach ($sections as $value)
                             <tr>
                                 <td class="table-plus">{{ $loop->index + 1 }}</td>
-                                <td>{{ $value->class_name }}</td>
+                                <td>{{ $value->class->class_name }}</td>
+                                <td>{{ $value->section_name }}</td>
                                 <td>
                                     @if ($value->status == 'Active')
                                         <span class="p-1 text-white rounded span bg-success">Active</span>
@@ -44,11 +46,11 @@
                                 <td>{{ $value->position }}</td>
                                 <td>
                                     <div class="d-flex align-items-center" style="gap:6px;">
-                                        <a href="{{ route('admin.class.edit', $value->id) }}" class="p-0 m-0">
+                                        <a href="{{ route('admin.section.edit', $value->id) }}" class="p-0 m-0">
                                             <i class="dw dw-edit2 bg-primary p-2 text-white rounded"></i>
                                         </a>
 
-                                        <form action="{{ route('admin.class.destroy', $value->id) }}" method="POST"
+                                        <form action="{{ route('admin.section.destroy', $value->id) }}" method="POST"
                                             class="m-0 p-0 delete-form">
                                             @csrf
                                             @method('DELETE')
