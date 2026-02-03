@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\SectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth','prefix' => '/admin'], function () {
@@ -14,4 +15,7 @@ Route::group(['middleware' => 'auth','prefix' => '/admin'], function () {
 
     // class
     Route::resource('/class',ClassController::class)->names('admin.class');
+
+    // section
+    Route::resource('/section',SectionController::class)->names('admin.section');
 });
