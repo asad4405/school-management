@@ -47,6 +47,7 @@
                         <li><a href="{{ route('admin.section.index') }}">Section </a></li>
                         <li><a href="{{ route('admin.subject.index') }}">Subject </a></li>
                         <li><a href="{{ route('admin.class.subject.index') }}">Class Subject </a></li>
+                        <li><a href="{{ route('admin.teacher.assignments.index') }}">Teacher Assignments </a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
