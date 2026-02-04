@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth','prefix' => '/admin'], function () {
@@ -18,4 +19,7 @@ Route::group(['middleware' => 'auth','prefix' => '/admin'], function () {
 
     // section
     Route::resource('/section',SectionController::class)->names('admin.section');
+
+    // subject
+    Route::resource('/subject',SubjectController::class)->names('admin.subject');
 });
