@@ -5,10 +5,10 @@
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
                 <div class="my-2 pull-left">
-                    <h4 class="text-blue h4"> Class Subject Lists</h4>
+                    <h4 class="text-blue h4">Teacher assignment Lists</h4>
                 </div>
                 <div class="pull-right">
-                    <a href="{{ route('admin.class.subject.create') }}" class="btn btn-primary btn-sm scroll-click"><i
+                    <a href="{{ route('admin.teacher.assignments.create') }}" class="btn btn-primary btn-sm scroll-click"><i
                             class="fa fa-plus"></i> Create</a>
                 </div>
             </div>
@@ -23,17 +23,21 @@
                     <thead>
                         <tr>
                             <th class="table-plus datatable-nosort">SL</th>
-                            <th>Class Name</th>
-                            <th>Subject Name</th>
+                            <th>Teacher </th>
+                            <th>Class </th>
+                            <th>Section </th>
+                            <th>Subject  </th>
                             <th>Status</th>
                             <th class="datatable-nosort">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($class_subjects as $value)
+                        @foreach ($teacher_assignments as $value)
                             <tr>
                                 <td class="table-plus">{{ $loop->index + 1 }}</td>
-                                <td>{{ $value->class->class_name }}</td>
+                                <td>{{ $value->teacher->teacher->name }}</td>
+                                <td>{{ $value->class_subject->class_name }}</td>
+                                <td>{{ $value->section->section_name }}</td>
                                 <td>
                                     @foreach (json_decode($value->subject_id) as $subject_id)
                                         @php
@@ -53,11 +57,11 @@
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center" style="gap:6px;">
-                                        <a href="{{ route('admin.class.subject.edit', $value->id) }}" class="p-0 m-0">
+                                        <a href="{{ route('admin.teacher.assignments.edit', $value->id) }}" class="p-0 m-0">
                                             <i class="dw dw-edit2 bg-primary p-2 text-white rounded"></i>
                                         </a>
 
-                                        <form action="{{ route('admin.class.subject.destroy', $value->id) }}" method="POST"
+                                        <form action="{{ route('admin.teacher.assignments.destroy', $value->id) }}" method="POST"
                                             class="m-0 p-0 delete-form">
                                             @csrf
                                             @method('DELETE')

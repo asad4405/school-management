@@ -25,7 +25,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Subject Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <select name="subject_id" class="form-control">
+                        <select name="subject_id[]" class="form-control select2-multiple" multiple="multiple">
                             <option>Select Subject</option>
                             @foreach ($subject as $value)
                                 <option value="{{ $value->id }}">{{ $value->subject_name }}</option>
@@ -58,4 +58,19 @@
             </form>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.select2-multiple').select2({
+                placeholder: "Select",
+                closeOnSelect: false,
+                width: '100%'
+            });
+        });
+    </script>
 @endsection

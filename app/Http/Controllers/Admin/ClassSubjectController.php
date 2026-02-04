@@ -41,7 +41,7 @@ class ClassSubjectController extends Controller
 
         $class_subject = new ClassSubject();
         $class_subject->class_id   = $request->class_id;
-        $class_subject->subject_id = $request->subject_id;
+        $class_subject->subject_id = json_encode($request->subject_id);
         $class_subject->position   = $request->position;
         $class_subject->status     = $request->status;
         $class_subject->save();
@@ -80,7 +80,7 @@ class ClassSubjectController extends Controller
 
         $class_subject = ClassSubject::findOrFail($id);
         $class_subject->class_id   = $request->class_id;
-        $class_subject->subject_id = $request->subject_id;
+        $class_subject->subject_id = json_encode($request->subject_id);
         $class_subject->position   = $request->position;
         $class_subject->status     = $request->status;
         $class_subject->save();

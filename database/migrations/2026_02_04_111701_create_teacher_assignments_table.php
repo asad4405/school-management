@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_subjects', function (Blueprint $table) {
+        Schema::create('teacher_assignments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id')->constrained()->cascadeOnDelete();
+            $table->integer('admin_id')->nullable();
+            $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
+            $table->integer('class_id');
+            $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->json('subject_id');
             $table->integer('position')->nullable();
             $table->string('status')->default('Active');
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_subjects');
+        Schema::dropIfExists('teacher_assignments');
     }
 };
