@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\ClassSubjectController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SubjectController;
@@ -22,4 +23,7 @@ Route::group(['middleware' => 'auth','prefix' => '/admin'], function () {
 
     // subject
     Route::resource('/subject',SubjectController::class)->names('admin.subject');
+
+    // class subject
+    Route::resource('/class-subject',ClassSubjectController::class)->names('admin.class.subject');
 });

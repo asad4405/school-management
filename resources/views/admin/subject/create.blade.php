@@ -24,6 +24,13 @@
                 </div>
 
                 <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Position (optional)</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" name="position" type="number" value="" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Status</label>
                     <div class="col-sm-12 col-md-10">
                         <select class="custom-select col-12" name="status">

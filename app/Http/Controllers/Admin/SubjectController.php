@@ -38,6 +38,7 @@ class SubjectController extends Controller
         $subject = new Subject();
         $subject->subject_name = $request->subject_name;
         $subject->subject_code = $request->subject_code;
+        $subject->position     = $request->position;
         $subject->status       = $request->status;
         $subject->save();
 
@@ -73,6 +74,7 @@ class SubjectController extends Controller
         $subject = Subject::findOrFail($id);
         $subject->subject_name = $request->subject_name;
         $subject->subject_code = $request->subject_code;
+        $subject->position   = $request->position;
         $subject->status       = $request->status;
         $subject->save();
 

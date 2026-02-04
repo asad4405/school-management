@@ -5,22 +5,33 @@
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
                 <div class="my-2 pull-left">
-                    <h4 class="text-blue h4">Edit Subject</h4>
+                    <h4 class="text-blue h4">Edit Class Subject</h4>
                 </div>
             </div>
-            <form action="{{ route('admin.subject.update',$edit_data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.class.subject.update', $edit_data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Subject Name</label>
+                    <label class="col-sm-12 col-md-2 col-form-label">Class Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="subject_name" type="text" value="{{ $edit_data->subject_name }}" required />
+                        <select name="class_id" class="form-control">
+                            <option>Select Class</option>
+                            @foreach ($class as $value)
+                                <option @if($value->id == $edit_data->class_id) selected @endif value="{{ $value->id }}">{{ $value->class_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
+
                 <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Subject Code (optional)</label>
+                    <label class="col-sm-12 col-md-2 col-form-label">Subject Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="subject_code" type="text" value="{{ $edit_data->subject_code }}" />
+                        <select name="subject_id" class="form-control">
+                            <option>Select Subject</option>
+                            @foreach ($subject as $value)
+                                <option @if($value->id == $edit_data->subject_id) selected @endif value="{{ $value->id }}">{{ $value->subject_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
@@ -42,7 +53,7 @@
                 </div>
                 <div class=" btn-list">
                     <button type="submit" class="btn btn-primary active focus">
-                        Update Subject
+                        Update Class Subject
                     </button>
                 </div>
             </form>
