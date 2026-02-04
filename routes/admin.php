@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\ClassSubjectController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth','prefix' => '/admin'], function () {
@@ -13,9 +16,18 @@ Route::group(['middleware' => 'auth','prefix' => '/admin'], function () {
     // admin list
     Route::get('/list',[AdminController::class,'admin_list'])->name('admin.list');
 
+    // teacher list
+    Route::resource('/teacher',TeacherController::class)->names('admin.teacher');
+
     // class
     Route::resource('/class',ClassController::class)->names('admin.class');
 
     // section
     Route::resource('/section',SectionController::class)->names('admin.section');
+
+    // subject
+    Route::resource('/subject',SubjectController::class)->names('admin.subject');
+
+    // class subject
+    Route::resource('/class-subject',ClassSubjectController::class)->names('admin.class.subject');
 });
