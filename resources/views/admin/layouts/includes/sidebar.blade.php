@@ -25,6 +25,14 @@
                         <li><a href="{{ route('admin.list') }}">Admin List</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-person-video3"></span><span class="mtext">Teachers</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('admin.teacher.index') }}">Teacher List</a></li>
+                    </ul>
+                </li>
                 {{-- <li>
                     <a href="calendar.html" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-calendar4-week"></span><span class="mtext">Calendar</span>
