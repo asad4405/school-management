@@ -19,6 +19,14 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-person-video3"></span><span class="mtext">Teachers</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('teacher.list') }}">Teacher List</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon bi bi-easel-fill"></span><span class="mtext">Class & Subject</span>
                     </a>
                     <ul class="submenu">

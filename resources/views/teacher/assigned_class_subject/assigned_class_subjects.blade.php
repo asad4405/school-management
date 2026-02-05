@@ -7,10 +7,6 @@
                 <div class="my-2 pull-left">
                     <h4 class="text-blue h4">Teacher assignment Lists</h4>
                 </div>
-                <div class="pull-right">
-                    <a href="{{ route('admin.teacher.assignments.create') }}" class="btn btn-primary btn-sm scroll-click"><i
-                            class="fa fa-plus"></i> Create</a>
-                </div>
             </div>
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
