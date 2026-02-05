@@ -19,10 +19,10 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-people-fill"></span><span class="mtext">Admins</span>
+                        <span class="micon bi bi-easel-fill"></span><span class="mtext">Class & Subject</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('admin.list') }}">Admin List</a></li>
+                        <li><a href="{{ route('teacher.assigned.class.subjects') }}">Assigned Class Subject</a></li>
                     </ul>
                 </li>
                 {{-- <li>
