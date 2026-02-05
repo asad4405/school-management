@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ClassSubjectController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\StudentEntollmentsController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherAssignmentsController;
 use App\Http\Controllers\Admin\TeacherController;
@@ -39,4 +40,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
     // teacher_assignments
     Route::resource('/teacher-assignments', TeacherAssignmentsController::class)->names('admin.teacher.assignments');
     Route::get('/get-class-subjects', [TeacherAssignmentsController::class, 'getSubjects'])->name('getClassSubjects');
+
+    // student enrollment
+    Route::resource('/student-enrollment', StudentEntollmentsController::class)->names('admin.student.enrollment');
 });
