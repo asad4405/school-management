@@ -56,6 +56,7 @@
                         <li><a href="{{ route('admin.subject.index') }}">Subject </a></li>
                         <li><a href="{{ route('admin.class.subject.index') }}">Class Subject </a></li>
                         <li><a href="{{ route('admin.teacher.assignments.index') }}">Teacher Assignments </a></li>
+                        <li><a href="{{ route('admin.student.enrollment.index') }}">Student Enrollment </a></li>
                     </ul>
                 </li>
                 <li>
