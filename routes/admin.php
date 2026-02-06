@@ -13,38 +13,44 @@ use App\Http\Controllers\Admin\TeacherAssignmentsController;
 use App\Http\Controllers\Admin\TeacherController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
-    // admin dashboard
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('admin.dashboard');
+Route::group(['prefix' => '/admin'], function () {
+    // admin login
+    Route::get('/login', [HomeController::class, 'admin_login'])->name('admin.login');
+    Route::post('/login/submit', [HomeController::class, 'admin_login_submit'])->name('admin.login.submit');
 
-    // admin list
-    Route::get('/list', [AdminController::class, 'admin_list'])->name('admin.list');
+    Route::group(['middleware' => 'admin'], function () {
+        // admin dashboard
+        Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('admin.dashboard');
 
-    // student list
-    Route::resource('/student', StudentController::class)->names('admin.student');
+        // admin list
+        Route::get('/list', [AdminController::class, 'admin_list'])->name('admin.list');
 
-    // teacher list
-    Route::resource('/teacher', TeacherController::class)->names('admin.teacher');
+        // student list
+        Route::resource('/student', StudentController::class)->names('admin.student');
 
-    // class
-    Route::resource('/class', ClassController::class)->names('admin.class');
+        // teacher list
+        Route::resource('/teacher', TeacherController::class)->names('admin.teacher');
 
-    // section
-    Route::resource('/section', SectionController::class)->names('admin.section');
+        // class
+        Route::resource('/class', ClassController::class)->names('admin.class');
 
-    // subject
-    Route::resource('/subject', SubjectController::class)->names('admin.subject');
+        // section
+        Route::resource('/section', SectionController::class)->names('admin.section');
 
-    // class subject
-    Route::resource('/class-subject', ClassSubjectController::class)->names('admin.class.subject');
+        // subject
+        Route::resource('/subject', SubjectController::class)->names('admin.subject');
 
-    // teacher_assignments
-    Route::resource('/teacher-assignments', TeacherAssignmentsController::class)->names('admin.teacher.assignments');
-    Route::get('/get-class-subjects', [TeacherAssignmentsController::class, 'getSubjects'])->name('getClassSubjects');
+        // class subject
+        Route::resource('/class-subject', ClassSubjectController::class)->names('admin.class.subject');
 
-    // student enrollment
-    Route::resource('/student-enrollment', StudentEntollmentsController::class)->names('admin.student.enrollment');
+        // teacher_assignments
+        Route::resource('/teacher-assignments', TeacherAssignmentsController::class)->names('admin.teacher.assignments');
+        Route::get('/get-class-subjects', [TeacherAssignmentsController::class, 'getSubjects'])->name('getClassSubjects');
 
-    // student enrollment
-    Route::resource('/exam', ExamController::class)->names('admin.exam');
+        // student enrollment
+        Route::resource('/student-enrollment', StudentEntollmentsController::class)->names('admin.student.enrollment');
+
+        // student enrollment
+        Route::resource('/exam', ExamController::class)->names('admin.exam');
+    });
 });
