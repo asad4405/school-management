@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\ClassSubjectController;
+use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\StudentController;
@@ -43,4 +44,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 
     // student enrollment
     Route::resource('/student-enrollment', StudentEntollmentsController::class)->names('admin.student.enrollment');
+
+    // student enrollment
+    Route::resource('/exam', ExamController::class)->names('admin.exam');
 });
