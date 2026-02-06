@@ -13,51 +13,65 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('admin.dashboard') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-house"></span><span class="mtext">Home</span>
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-people-fill"></span><span class="mtext">Students</span>
+                <li>
+                    <a href="{{ route('admin.student.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-person-lines-fill"></span><span class="mtext">Students</span>
                     </a>
-                    <ul class="submenu">
-                        <li><a href="{{ route('admin.student.index') }}">Student List</a></li>
-                    </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
+                <li>
+                    <a href="{{ route('admin.list') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-people-fill"></span><span class="mtext">Admins</span>
                     </a>
-                    <ul class="submenu">
-                        <li><a href="{{ route('admin.list') }}">Admin List</a></li>
-                    </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
+                <li>
+                    <a href="{{ route('admin.teacher.index') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-person-video3"></span><span class="mtext">Teachers</span>
                     </a>
-                    <ul class="submenu">
-                        <li><a href="{{ route('admin.teacher.index') }}">Teacher List</a></li>
-                    </ul>
                 </li>
-                {{-- <li>
-                    <a href="calendar.html" class="dropdown-toggle no-arrow">
-                        <span class="micon bi bi-calendar4-week"></span><span class="mtext">Calendar</span>
-                    </a>
-                </li> --}}
+
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-archive"></span><span class="mtext"> Classes </span>
+                        <span class="micon bi bi-easel"></span><span class="mtext"> Class & Section </span>
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ route('admin.class.index') }}">Class </a></li>
                         <li><a href="{{ route('admin.section.index') }}">Section </a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-book-half"></span><span class="mtext"> Subject & Class </span>
+                    </a>
+                    <ul class="submenu">
                         <li><a href="{{ route('admin.subject.index') }}">Subject </a></li>
                         <li><a href="{{ route('admin.class.subject.index') }}">Class Subject </a></li>
-                        <li><a href="{{ route('admin.teacher.assignments.index') }}">Teacher Assignments </a></li>
-                        <li><a href="{{ route('admin.student.enrollment.index') }}">Student Enrollment </a></li>
                     </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-person-check"></span><span class="mtext"> Assigned Teacher </span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('admin.teacher.assignments.index') }}">Teacher Assignments </a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-person-plus"></span><span class="mtext"> Student Enrollment </span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('admin.student.enrollment.index') }}">Enrollment </a></li>
+                        <li><a href="{{ route('admin.exam.index') }}">Exam </a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ route('admin.exam.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-clock-history"></span><span class="mtext">Exams</span>
+                    </a>
                 </li>
                 <li>
                     <div class="sidebar-small-cap">Extra</div>
