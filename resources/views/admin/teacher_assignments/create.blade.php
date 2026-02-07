@@ -8,6 +8,9 @@
                     <h4 class="text-blue h4">Create Teacher Assignment</h4>
                 </div>
             </div>
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             <form action="{{ route('admin.teacher.assignments.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
@@ -19,11 +22,14 @@
                                 <option value="{{ $teacher->id }}">{{ $teacher->teacher->name }}</option>
                             @endforeach
                         </select>
+                        @error('teacher_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Teacher</label>
+                    <label class="col-sm-12 col-md-2 col-form-label">Class</label>
                     <div class="col-sm-12 col-md-10">
                         <select class="custom-select col-12" name="class_id" id="class_id" required>
                             <option value="">Select Class</option>
@@ -33,6 +39,9 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('class_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -44,6 +53,9 @@
                             multiple="multiple">
                             <!-- Subjects will be loaded via AJAX -->
                         </select>
+                        @error('subject_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -57,6 +69,9 @@
                                 <option value="{{ $section->id }}">{{ $section->section_name }}</option>
                             @endforeach
                         </select>
+                        @error('section_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 

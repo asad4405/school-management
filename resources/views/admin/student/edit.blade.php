@@ -17,6 +17,9 @@
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" name="name" type="text" value="{{ $edit_user_student->name }}"
                             required />
+                        @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -24,12 +27,19 @@
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" name="email" type="email" value="{{ $edit_user_student->email }}"
                             required />
+                        @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Phone</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="phone" type="text" value="{{ $edit_user_student->phone }}" />
+                        <input class="form-control" name="phone" type="text" value="{{ $edit_user_student->phone }}"
+                            required />
+                        @error('phone')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -41,7 +51,8 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Expire Date</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="expire_date" type="date" value="{{ $edit_student->expire_date }}" />
+                        <input class="form-control" name="expire_date" type="date"
+                            value="{{ $edit_student->expire_date }}" />
                     </div>
                 </div>
                 <div class="form-group row">

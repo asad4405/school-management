@@ -19,6 +19,9 @@
                                 <option value="{{ $value->id }}">{{ $value->student->name }}</option>
                             @endforeach
                         </select>
+                        @error('student_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -30,6 +33,9 @@
                                 <option value="{{ $value->id }}">{{ $value->class_name }}</option>
                             @endforeach
                         </select>
+                        @error('class_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -41,6 +47,9 @@
                                 <option value="{{ $value->id }}">{{ $value->section_name }}</option>
                             @endforeach
                         </select>
+                        @error('section_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -48,6 +57,9 @@
                     <label class="col-sm-12 col-md-2 col-form-label">Academic Year</label>
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" name="academic_year" type="text" required />
+                        @error('academic_year')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 

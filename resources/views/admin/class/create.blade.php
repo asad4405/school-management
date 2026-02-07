@@ -14,6 +14,9 @@
                     <label class="col-sm-12 col-md-2 col-form-label">Class Name</label>
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" name="class_name" type="text" required />
+                        @error('class_name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">

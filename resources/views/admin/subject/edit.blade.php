@@ -8,19 +8,24 @@
                     <h4 class="text-blue h4">Edit Subject</h4>
                 </div>
             </div>
-            <form action="{{ route('admin.subject.update',$edit_data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.subject.update', $edit_data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Subject Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="subject_name" type="text" value="{{ $edit_data->subject_name }}" required />
+                        <input class="form-control" name="subject_name" type="text" value="{{ $edit_data->subject_name }}"
+                            required />
+                        @error('subject_name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Subject Code (optional)</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="subject_code" type="text" value="{{ $edit_data->subject_code }}" />
+                        <input class="form-control" name="subject_code" type="text"
+                            value="{{ $edit_data->subject_code }}" />
                     </div>
                 </div>
 
