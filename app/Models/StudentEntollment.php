@@ -18,4 +18,8 @@ class StudentEntollment extends Model
     {
         return $this->hasOne(Section::class, 'id', 'section_id');
     }
+    public function attendance()
+    {
+        return $this->hasOne(Attendance::class, 'student_id', 'student_id');
+    }
 }
