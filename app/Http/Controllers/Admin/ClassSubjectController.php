@@ -82,6 +82,10 @@ class ClassSubjectController extends Controller
             'subject_id' => 'required',
         ]);
 
+        if(ClassSubject::where('class_id', $request->class_id)->exists()) {
+            return redirect()->back()->with('error', 'Class Already Exists!');
+        }
+
         $class_subject = ClassSubject::findOrFail($id);
         $class_subject->class_id   = $request->class_id;
         $class_subject->subject_id = json_encode($request->subject_id);

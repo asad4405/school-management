@@ -8,12 +8,15 @@
                     <h4 class="text-blue h4">Create Student Enrollment</h4>
                 </div>
             </div>
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             <form action="{{ route('admin.student.enrollment.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Student Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <select name="student_id" class="form-control">
+                        <select name="student_id" class="form-control select2_student">
                             <option>Select Student</option>
                             @foreach ($students as $value)
                                 <option value="{{ $value->id }}">{{ $value->student->name }}</option>
@@ -27,7 +30,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Class Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <select name="class_id" class="form-control">
+                        <select name="class_id" class="form-control select2_class">
                             <option>Select Class</option>
                             @foreach ($class as $value)
                                 <option value="{{ $value->id }}">{{ $value->class_name }}</option>
@@ -41,7 +44,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Section Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <select name="section_id" class="form-control">
+                        <select name="section_id" class="form-control select2_section">
                             <option>Select Section</option>
                             @foreach ($section as $value)
                                 <option value="{{ $value->id }}">{{ $value->section_name }}</option>
@@ -87,4 +90,32 @@
             </form>
         </div>
     </div>
+    <style>
+        .select2-container--default .select2-selection--single {
+            display: flex !important;
+            align-items: center !important;
+            height: 45px !important;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.select2_student').select2({
+                placeholder: "Select Student",
+                allowClear: true
+            });
+            $('.select2_class').select2({
+                placeholder: "Select Class",
+                allowClear: true
+            });
+            $('.select2_section').select2({
+                placeholder: "Select Section",
+                allowClear: true
+            });
+        });
+    </script>
 @endsection

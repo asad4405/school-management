@@ -110,6 +110,10 @@ class TeacherAssignmentsController extends Controller
             'subject_id' => 'required',
         ]);
 
+        if(TeacherAssignment::where('class_id', $request->class_id)->exists()) {
+            return redirect()->back()->with('error', 'Class Already Exists!');
+        }
+
         $teacher_assignment = TeacherAssignment::findOrFail($id);
         $teacher_assignment->teacher_id   = $request->teacher_id;
         $teacher_assignment->class_id     = $request->class_id;

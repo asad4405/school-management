@@ -38,24 +38,18 @@
                                 <td>{{ $value->student->roll_no }}</td>
                                 <td>{{ $value->student->reg_no }}</td>
                                 <td>
-                                    {{-- Present --}}
-                                    <a href="javascript:void(0)" class="p-2 text-white rounded span bg-success attendance-btn
-                                      {{ $value->attendance->status == 'Present' ? '' : 'opacity-50' }}" data-id="{{ $value->student_id }}"
-                                        data-status="Present">
+                                    <a href="javascript:void(0)" style="display:inline-block; margin-right:10px;" class="p-2 text-white rounded bg-success attendance-btn
+                                               {{ $value->attendance?->status === 'Present' ? '' : 'opacity-50' }}"
+                                        data-id="{{ $value->student_id }}" data-status="Present">
                                         Present
-                                        <span class="tick">
-                                            {{ $value->attendance->status == 'Present' ? '✔' : '' }}
-                                        </span>
+                                        <span class="tick">{{ $value->attendance?->status === 'Present' ? '✔' : '' }}</span>
                                     </a>
 
-                                    {{-- Absent --}}
-                                    <a href="javascript:void(0)" class="p-2 text-white rounded span bg-danger attendance-btn
-                                      {{ $value->attendance->status == 'Absent' ? '' : 'opacity-50' }}" data-id="{{ $value->student_id }}"
-                                        data-status="Absent">
+                                    <a href="javascript:void(0)" style="display:inline-block;" class="p-2 text-white rounded bg-danger attendance-btn
+                                               {{ $value->attendance?->status === 'Absent' ? '' : 'opacity-50' }}"
+                                        data-id="{{ $value->student_id }}" data-status="Absent">
                                         Absent
-                                        <span class="tick">
-                                            {{ $value->attendance->status == 'Absent' ? '✔' : '' }}
-                                        </span>
+                                        <span class="tick">{{ $value->attendance?->status === 'Absent' ? '✔' : '' }}</span>
                                     </a>
                                 </td>
 

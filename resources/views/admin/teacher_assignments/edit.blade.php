@@ -8,6 +8,9 @@
                     <h4 class="text-blue h4">Edit Teacher Assignment</h4>
                 </div>
             </div>
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             <form action="{{ route('admin.teacher.assignments.update', $teacher_assignment->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
@@ -15,7 +18,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Teacher</label>
                     <div class="col-sm-12 col-md-10">
-                        <select class="custom-select col-12" name="teacher_id" required>
+                        <select class="custom-select col-12 select2_teacher" name="teacher_id" required>
                             <option value="">Select Teacher</option>
                             @foreach ($teachers as $teacher)
                                 <option value="{{ $teacher->id }}" {{ $teacher_assignment->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->teacher->name }}</option>
@@ -46,7 +49,8 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
                     <div class="col-sm-12 col-md-10">
-                        <select class="form-control select2-multiple" name="subject_id[]" id="subject_id" multiple="multiple">
+                        <select class="form-control select2-multiple" name="subject_id[]" id="subject_id"
+                            multiple="multiple">
                             <!-- Subjects loaded by JS -->
                         </select>
                         @error('subject_id')
@@ -58,7 +62,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Section</label>
                     <div class="col-sm-12 col-md-10">
-                        <select class="custom-select col-12" name="section_id" required>
+                        <select class="custom-select col-12 select2_section" name="section_id" required>
                             <option value="">Select Section</option>
                             @foreach ($sections as $section)
                                 <option value="{{ $section->id }}" {{ $teacher_assignment->section_id == $section->id ? 'selected' : '' }}>{{ $section->section_name }}</option>
@@ -99,6 +103,20 @@
         </div>
     </div>
 
+    <style>
+        .select2-container--default .select2-selection--single {
+            display: flex !important;
+            align-items: center !important;
+            height: 45px !important;
+        }
+
+        .select2-container--default .select2-selection--multiple {
+            display: flex !important;
+            align-items: center !important;
+            height: 45px !important;
+        }
+    </style>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -110,6 +128,14 @@
                 placeholder: "Select",
                 closeOnSelect: false,
                 width: '100%'
+            });
+            $('.select2_teacher').select2({
+                placeholder: "Select Teacher",
+                allowClear: true
+            });
+            $('.select2_section').select2({
+                placeholder: "Select Section",
+                allowClear: true
             });
         });
     </script>
