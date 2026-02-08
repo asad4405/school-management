@@ -33,6 +33,14 @@
                         <li><a href="{{ route('teacher.assigned.class.subjects') }}">Assigned Class Subject</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-calendar-check-fill"></span><span class="mtext">Attendance</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('teacher.attendance.class') }}">Student Attendance</a></li>
+                    </ul>
+                </li>
                 {{-- <li>
                     <a href="calendar.html" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-calendar4-week"></span><span class="mtext">Calendar</span>
