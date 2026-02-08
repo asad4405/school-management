@@ -19,12 +19,18 @@
                                 <option value="{{ $value->id }}">{{ $value->class_name }}</option>
                             @endforeach
                         </select>
+                        @error('class_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Section Name</label>
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" name="section_name" type="text" required />
+                        @error('section_name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">

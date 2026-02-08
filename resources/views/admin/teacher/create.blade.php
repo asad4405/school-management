@@ -14,24 +14,33 @@
                     <label class="col-sm-12 col-md-2 col-form-label">Name</label>
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" name="name" type="text" required />
+                        @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Email</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="email" type="email"  />
+                        <input class="form-control" name="email" type="email" required />
+                        @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Phone</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="phone" type="text"  />
+                        <input class="form-control" name="phone" type="text" required />
+                        @error('phone')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Designation</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="designation" type="text"  />
+                        <input class="form-control" name="designation" type="text" required />
                     </div>
                 </div>
                 <div class="form-group row">

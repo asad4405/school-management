@@ -22,6 +22,9 @@
                                     {{ $value->class_name }}</option>
                             @endforeach
                         </select>
+                        @error('class_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -36,6 +39,9 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('subject_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 

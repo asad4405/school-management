@@ -8,6 +8,9 @@
                     <h4 class="text-blue h4">Create Class Subject</h4>
                 </div>
             </div>
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             <form action="{{ route('admin.class.subject.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
@@ -19,6 +22,9 @@
                                 <option value="{{ $value->id }}">{{ $value->class_name }}</option>
                             @endforeach
                         </select>
+                        @error('class_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -31,6 +37,9 @@
                                 <option value="{{ $value->id }}">{{ $value->subject_name }}</option>
                             @endforeach
                         </select>
+                        @error('subject_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 

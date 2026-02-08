@@ -46,6 +46,10 @@ class TeacherAssignmentsController extends Controller
             'subject_id' => 'required',
         ]);
 
+        if(TeacherAssignment::where('class_id', $request->class_id)->exists()) {
+            return redirect()->back()->with('error', 'Class Already Exists!');
+        }
+
         $teacher_assignment = new TeacherAssignment();
         $teacher_assignment->admin_id   = auth()->user()->id;
         $teacher_assignment->teacher_id = $request->teacher_id;
@@ -66,7 +70,7 @@ class TeacherAssignmentsController extends Controller
         $subject_ids = [];
         foreach ($classSubjects as $cs) {
             $ids = json_decode($cs->subject_id);
-            $subject_ids = array_merge($subject_ids, $ids); 
+            $subject_ids = array_merge($subject_ids, $ids);
         }
 
         $subjects = Subject::whereIn('id', $subject_ids)->get();

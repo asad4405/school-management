@@ -21,6 +21,9 @@
                                 <option value="{{ $teacher->id }}" {{ $teacher_assignment->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->teacher->name }}</option>
                             @endforeach
                         </select>
+                        @error('teacher_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -34,15 +37,21 @@
                                 </option>
                             @endforeach
                         </select>
+                        @error('class_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Class</label>
+                    <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
                     <div class="col-sm-12 col-md-10">
                         <select class="form-control select2-multiple" name="subject_id[]" id="subject_id" multiple="multiple">
                             <!-- Subjects loaded by JS -->
                         </select>
+                        @error('subject_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -55,6 +64,9 @@
                                 <option value="{{ $section->id }}" {{ $teacher_assignment->section_id == $section->id ? 'selected' : '' }}>{{ $section->section_name }}</option>
                             @endforeach
                         </select>
+                        @error('section_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 

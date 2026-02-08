@@ -20,6 +20,9 @@
                                 <option value="{{ $value->id }}" {{ $edit_data->student_id == $value->id ? 'selected' : '' }}>{{ $value->student->name }}</option>
                             @endforeach
                         </select>
+                        @error('student_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -31,6 +34,9 @@
                                 <option value="{{ $value->id }}" {{ $edit_data->class_id == $value->id ? 'selected' : '' }}>{{ $value->class_name }}</option>
                             @endforeach
                         </select>
+                        @error('class_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -42,6 +48,9 @@
                                 <option value="{{ $value->id }}" {{ $edit_data->section_id == $value->id ? 'selected' : '' }}>{{ $value->section_name }}</option>
                             @endforeach
                         </select>
+                        @error('section_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -49,6 +58,9 @@
                     <label class="col-sm-12 col-md-2 col-form-label">Academic Year</label>
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" name="academic_year" type="text" value="{{ $edit_data->academic_year }}" required />
+                        @error('academic_year')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
