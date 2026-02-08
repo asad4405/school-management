@@ -43,6 +43,10 @@ class StudentEntollmentsController extends Controller
             'academic_year' => 'required',
         ]);
 
+        if(StudentEntollment::where('class_id', $request->class_id)->exists()) {
+            return redirect()->back()->with('error', 'Class Already Exists!');
+        }
+
         $student_enrollment = new StudentEntollment();
         $student_enrollment->admin_id     = auth()->user()->id;
         $student_enrollment->student_id   = $request->student_id;
@@ -87,6 +91,10 @@ class StudentEntollmentsController extends Controller
             'section_id' => 'required',
             'academic_year' => 'required',
         ]);
+
+        if(StudentEntollment::where('class_id', $request->class_id)->exists()) {
+            return redirect()->back()->with('error', 'Class Already Exists!');
+        }
 
         $student_enrollment = StudentEntollment::findOrFail($id);
         $student_enrollment->admin_id     = auth()->user()->id;

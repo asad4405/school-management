@@ -16,7 +16,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Class Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <select name="class_id" class="form-control">
+                        <select name="class_id" class="form-control select2_class">
                             <option>Select Class</option>
                             @foreach ($class as $value)
                                 <option value="{{ $value->id }}">{{ $value->class_name }}</option>
@@ -68,6 +68,18 @@
         </div>
     </div>
 
+    <style>
+        .select2-container--default .select2-selection--single{
+            display: flex !important;
+            align-items: center !important;
+            height: 45px !important;
+        }
+        .select2-container--default .select2-selection--multiple{
+            display: flex !important;
+            align-items: center !important;
+            height: 45px !important;
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -76,9 +88,14 @@
     <script>
         $(document).ready(function () {
             $('.select2-multiple').select2({
-                placeholder: "Select",
+                placeholder: "Select Subject",
                 closeOnSelect: false,
                 width: '100%'
+            });
+
+            $('.select2_class').select2({
+                placeholder: "Select Class",
+                allowClear: true
             });
         });
     </script>

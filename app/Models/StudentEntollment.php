@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class StudentEntollment extends Model
@@ -20,6 +21,7 @@ class StudentEntollment extends Model
     }
     public function attendance()
     {
-        return $this->hasOne(Attendance::class, 'student_id', 'student_id');
+        return $this->hasOne(Attendance::class, 'student_id', 'student_id')
+            ->whereDate('date', Carbon::today());
     }
 }

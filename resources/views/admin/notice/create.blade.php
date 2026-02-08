@@ -5,34 +5,45 @@
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
                 <div class="my-2 pull-left">
-                    <h4 class="text-blue h4">Create Section</h4>
+                    <h4 class="text-blue h4">Create Notice</h4>
                 </div>
             </div>
-            <form action="{{ route('admin.section.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.notice.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Class Name</label>
+                    <label class="col-sm-12 col-md-2 col-form-label">Notice Title</label>
                     <div class="col-sm-12 col-md-10">
-                        <select name="class_id" class="form-control select2">
-                            <option>Select Class</option>
-                            @foreach ($class as $value)
-                                <option value="{{ $value->id }}">{{ $value->class_name }}</option>
-                            @endforeach
-                        </select>
-                        @error('class_id')
+                        <input class="form-control" name="title" type="text" required />
+                        @error('title')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Section Name</label>
+                    <label class="col-sm-12 col-md-2 col-form-label">Description</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="section_name" type="text" required />
-                        @error('section_name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <textarea name="description" id="description" class="form-control"></textarea>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Notice For</label>
+                    <div class="col-sm-12 col-md-10">
+                        <select class="custom-select col-12" name="notice_for">
+                            <option value="all">All</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">File (optional)</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" name="file" type="file" />
+                    </div>
+                </div>
+
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Position (optional)</label>
                     <div class="col-sm-12 col-md-10">
@@ -51,29 +62,11 @@
                 </div>
                 <div class=" btn-list">
                     <button type="submit" class="btn btn-primary active focus">
-                        Add Section
+                        Add Notice
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <style>
-        .select2-container .select2-selection--single {
-            display: flex;
-            align-items: center;
-            height: 45px;
-        }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('.select2').select2({
-                placeholder: "Select Class",
-                allowClear: true
-            });
-        });
-    </script>
 
 @endsection

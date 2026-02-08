@@ -74,6 +74,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.notice.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-bell"></span><span class="mtext">Notices</span>
+                    </a>
+                </li>
+                <li>
                     <div class="sidebar-small-cap">Extra</div>
                 </li>
                 <li>
