@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Teacher\AttendanceController;
 use App\Http\Controllers\Teacher\HomeController;
+use App\Http\Controllers\Teacher\ResultController;
 use App\Http\Controllers\Teacher\TeacherController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,12 @@ Route::group(['prefix' => '/teacher'], function () {
         Route::get('/attendance/students/{class_id}', [AttendanceController::class,'attendance_students'])->name('teacher.attendance.students');
         Route::post('/attendance/store/update', [AttendanceController::class,'attendance_store_update'])->name('teacher.attendance.store.update');
         Route::resource('/attendance', AttendanceController::class)->names('teacher.attendance');
+
+        // result
+        Route::get('/result/class', [ResultController::class,'result_class'])->name('teacher.result.class');
+        Route::get('/result/students/{class_id}', [ResultController::class,'result_students'])->name('teacher.result.students');
+        Route::get('/result/exam-list/{student_id}', [ResultController::class,'result_exam_list'])->name('teacher.result.exam.list');
+        Route::get('/result/entry/{student_id}', [ResultController::class,'result_entry'])->name('teacher.result.entry');
+        Route::post('/result/entry/store/update/{student_id}', [ResultController::class,'result_entry_store_update'])->name('teacher.result.entry.store.update');
     });
 });
