@@ -32,15 +32,12 @@ class ExamController extends Controller
     {
         $request->validate([
             'exam_name' => 'required',
-            'exam_year' => 'required',
         ]);
 
         $exam = new Exam();
         $exam->admin_id      = auth()->user()->id;
         $exam->exam_name     = $request->exam_name;
-        $exam->exam_year     = $request->exam_year;
         $exam->position      = $request->position;
-        $exam->position_date = $request->position_date;
         $exam->status        = $request->status;
         $exam->save();
 
@@ -71,14 +68,11 @@ class ExamController extends Controller
     {
         $request->validate([
             'exam_name' => 'required',
-            'exam_year' => 'required',
         ]);
 
         $exam = Exam::findOrFail($id);
         $exam->exam_name       = $request->exam_name;
-        $exam->exam_year       = $request->exam_year;
         $exam->position        = $request->position;
-        $exam->position_date   = $request->position_date;
         $exam->status          = $request->status;
         $exam->save();
 

@@ -11,34 +11,34 @@
 
                     <div class="card-body p-4">
 
-                        <form action="" method="POST">
+                        <form action="{{ route('result.store') }}" method="POST">
                             @csrf
                             <!-- Exam Name -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Exam Name</label>
                                 <select class="form-select" name="exam">
                                     <option selected disabled>Select Exam</option>
-                                    <option value="">Mid Term</option>
-                                    <option value="">Final Exam</option>
-                                    <option value="">Test Exam</option>
+                                    @foreach($exams as $exam)
+                                        <option value="{{ $exam->id }}">{{ $exam->exam_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <!-- Year -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Year of Examination</label>
-                                <select class="form-select" name="year">
+                                <select class="form-select" name="exam_year">
                                     <option selected disabled>Select Year</option>
-                                    <option value="">2025</option>
-                                    <option value="">2024</option>
-                                    <option value="">2023</option>
+                                    @foreach ($exam_years as $value)
+                                        <option value="{{ $value }}">{{ $value }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <!-- Result Type -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Type of Result</label>
-                                <select class="form-select" id="resultType">
+                                <select class="form-select" id="resultType" name="result_type">
                                     <option selected disabled>Select Type</option>
                                     <option value="individual">Individual / Detailed Result</option>
                                     <option value="classwise">Class Wise Result</option>
@@ -54,7 +54,8 @@
 
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Registration Number of Examinee</label>
-                                    <input type="text" name="reg_no" class="form-control" placeholder="Enter Registration Number">
+                                    <input type="text" name="reg_no" class="form-control"
+                                        placeholder="Enter Registration Number">
                                 </div>
                             </div>
 
@@ -62,13 +63,11 @@
                             <div id="classWiseField" style="display: none;">
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Select Class</label>
-                                    <select class="form-select">
+                                    <select class="form-select" name="class">
                                         <option selected disabled>Select Class</option>
-                                        <option>Class 6</option>
-                                        <option>Class 7</option>
-                                        <option>Class 8</option>
-                                        <option>Class 9</option>
-                                        <option>Class 10</option>
+                                        @foreach ($classes as $value)
+                                            <option value="{{ $value->id }}">{{ $value->class_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

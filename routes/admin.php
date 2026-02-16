@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\ClassSubjectController;
 use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\ExamPublishController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\SectionController;
@@ -51,8 +52,9 @@ Route::group(['prefix' => '/admin'], function () {
         // student enrollment
         Route::resource('/student-enrollment', StudentEntollmentsController::class)->names('admin.student.enrollment');
 
-        // student enrollment
+        // exam and years
         Route::resource('/exam', ExamController::class)->names('admin.exam');
+        Route::resource('/exam-publish', ExamPublishController::class)->names('admin.exampublish');
 
         // student enrollment
         Route::resource('/notice', NoticeController::class)->names('admin.notice');
