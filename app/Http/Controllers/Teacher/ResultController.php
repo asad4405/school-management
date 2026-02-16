@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use App\Models\Classes;
+use App\Models\ClassSubject;
 use App\Models\Exam;
+use App\Models\Exampublish;
 use App\Models\Result;
 use App\Models\Resultdetails;
 use App\Models\Student;
@@ -45,6 +47,7 @@ class ResultController extends Controller
 
         $student = Student::where('id', $student_id)->with('student')->first();
         $exam = Exam::where('id', $request->exam_id)->first();
+        $exam_years = Exampublish::where('exam_id', $exam->id)->get();
         $teacher_id = Teacher::where('user_id', auth()->id())->first()->id;
         $teacher_assign = TeacherAssignment::where('teacher_id', $teacher_id)
             ->where('class_id', $student_entollment->class_id)
@@ -78,7 +81,9 @@ class ResultController extends Controller
             'student_entollment',
             'student',
             'exam',
+            'exam_years',
             'subjects',
+            'result',
             'edit_result'
         ));
     }
@@ -105,6 +110,7 @@ class ResultController extends Controller
             'exam_id' => $request->exam_id,
             'class_id' => $student_entollment->class_id,
             'section_id' => $student_entollment->section_id,
+            'year' => $request->year,
         ])->first();
 
         if (!$result) {
@@ -113,6 +119,7 @@ class ResultController extends Controller
             $result->exam_id = $request->exam_id;
             $result->class_id = $student_entollment->class_id;
             $result->section_id = $student_entollment->section_id;
+            $result->year = $request->year;
             $result->full_marks = 0;
             $result->avg_gpa = 0;
             $result->avg_grade = 'F';

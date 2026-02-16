@@ -10,6 +10,11 @@
                     </div>
 
                     <div class="card-body p-4">
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
 
                         <form action="{{ route('result.store') }}" method="POST">
                             @csrf
@@ -22,17 +27,23 @@
                                         <option value="{{ $exam->id }}">{{ $exam->exam_name }}</option>
                                     @endforeach
                                 </select>
+                                @error('exam')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <!-- Year -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Year of Examination</label>
-                                <select class="form-select" name="exam_year">
+                                <select class="form-select" name="year">
                                     <option selected disabled>Select Year</option>
                                     @foreach ($exam_years as $value)
                                         <option value="{{ $value }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
+                                @error('year')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <!-- Result Type -->
@@ -43,6 +54,9 @@
                                     <option value="individual">Individual / Detailed Result</option>
                                     <option value="classwise">Class Wise Result</option>
                                 </select>
+                                @error('result_type')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <!-- Individual Fields -->
@@ -50,12 +64,18 @@
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Roll Number of Examinee</label>
                                     <input type="text" name="roll_no" class="form-control" placeholder="Enter Roll Number">
+                                    @error('roll_no')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Registration Number of Examinee</label>
                                     <input type="text" name="reg_no" class="form-control"
                                         placeholder="Enter Registration Number">
+                                    @error('reg_no')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -69,6 +89,9 @@
                                             <option value="{{ $value->id }}">{{ $value->class_name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('class')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
