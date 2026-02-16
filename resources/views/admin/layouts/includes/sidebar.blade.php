@@ -68,10 +68,14 @@
                         <li><a href="{{ route('admin.exam.index') }}">Exam </a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="{{ route('admin.exam.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon bi bi-clock-history"></span><span class="mtext">Exams</span>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-clock-history"></span><span class="mtext"> Exam & Publish </span>
                     </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('admin.exam.index') }}">Exam </a></li>
+                        <li><a href="{{ route('admin.exampublish.index') }}">Publish </a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="{{ route('admin.notice.index') }}" class="dropdown-toggle no-arrow">

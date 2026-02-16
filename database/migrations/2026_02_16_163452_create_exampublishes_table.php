@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exams', function (Blueprint $table) {
+        Schema::create('exampublishes', function (Blueprint $table) {
             $table->id();
             $table->integer('admin_id')->nullable();
-            $table->string('exam_name');
+            $table->foreignId('exam_id')->constrained()->cascadeOnDelete();
+            $table->integer('exam_year');
+            $table->dateTime('publish_date')->nullable();
             $table->integer('position')->nullable();
             $table->string('status')->default('Active');
             $table->timestamps();
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exams');
+        Schema::dropIfExists('exampublishes');
     }
 };

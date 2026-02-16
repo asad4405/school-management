@@ -5,26 +5,39 @@
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
                 <div class="my-2 pull-left">
-                    <h4 class="text-blue h4">Edit Exam</h4>
+                    <h4 class="text-blue h4">Edit Exam Publish</h4>
                 </div>
             </div>
-            <form action="{{ route('admin.exam.update', parameters: $edit_data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.exampublish.update', $edit_data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Exam Name</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="exam_name" type="text" value="{{ $edit_data->exam_name }}" required />
-                        @error('exam_name')
+                        <select class="custom-select col-12" name="exam_id" required>
+                            <option value="">Select Exam</option>
+                            @foreach ($exams as $exam)
+                                <option value="{{ $exam->id }}" {{ $exam->id == $edit_data->exam_id ? 'selected' : '' }}>{{ $exam->exam_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Exam Year</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" value="{{ $edit_data->exam_year }}" name="exam_year" type="text" required />
+                        @error('exam_year')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Position (optional)</label>
+                    <label class="col-sm-12 col-md-2 col-form-label">Publish Date & Time</label>
                     <div class="col-sm-12 col-md-10">
-                        <input class="form-control" name="position" type="number" value="{{ $edit_data->position }}" />
+                        <input class="form-control" value="{{ $edit_data->publish_date }}" name="publish_date" type="datetime-local" required />
+                        @error('publish_date')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -39,7 +52,7 @@
                 </div>
                 <div class=" btn-list">
                     <button type="submit" class="btn btn-primary active focus">
-                        Update Exam
+                        Update Exam Publish
                     </button>
                 </div>
             </form>
