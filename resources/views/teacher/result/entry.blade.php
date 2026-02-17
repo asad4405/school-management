@@ -3,6 +3,9 @@
     <div class="main-container">
         <!-- Default Basic Forms Start -->
         <div class="pd-20 card-box mb-30">
+            <div>
+                <marquee behavior="" direction="" class="text-danger fw-bold">বিশেষ দ্রষ্টব্য: এই স্টুডেন্টের প্রথমবার রেজাল্ট এন্ট্রির সময় অবশ্যই চেক করবেন সাল, ওই সাবজেক্টের পাশ মার্কস এবং ফুল মার্কস। [এখানে পাস মার্কস ডিফল্টভাবে 33 এবং ফুল মার্কস ডিফল্টভাবে 100 দেওয়া আছে] এবং সর্বশেষ মার্কস দিয়ে রেজাল্ট এন্ট্রি করবেন ধন্যবাদ।</marquee>
+            </div>
             <div class="clearfix">
                 <div class="my-2 pull-left">
                     <h4 class="text-blue h4">Result Entry</h4>
@@ -47,9 +50,17 @@
                 {{-- exam --}}
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Exam</label>
-                    <div class="col-sm-12 col-md-10">
+                    <div class="col-sm-12 col-md-5">
                         <select name="exam_id" id="exam_id" class="form-control">
                             <option value="{{ $exam->id }}" selected>{{ $exam->exam_name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-md-5">
+                        <select name="year" id="year" class="form-control">
+                            @foreach ($exam_years as $value)
+                                <option value="{{ $value->exam_year }}" {{ $value->exam_year == optional($result)->year ? 'selected' : '' }}>
+                                    {{ $value->exam_year }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -105,7 +116,7 @@
 
                 <div class=" btn-list">
                     <button type="submit" class="btn btn-primary active focus">
-                        Add Result
+                        Entry Result
                     </button>
                 </div>
             </form>

@@ -17,9 +17,11 @@ return new class extends Migration
             $table->integer('exam_id');
             $table->integer('class_id');
             $table->integer('section_id');
-            $table->integer('full_marks');
+            $table->integer('total_marks');
             $table->string('avg_gpa');
             $table->string('avg_grade');
+            $table->string('position')->nullable();
+            $table->string('year');
             $table->timestamps();
         });
     }

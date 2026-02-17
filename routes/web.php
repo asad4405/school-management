@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontendController::class,'index'])->name('home');
 Route::get('/result',[FrontendController::class,'result'])->name('result');
+Route::post('/result/store',[FrontendController::class,'result_store'])->name('result.store');
+// Route::get('/result/show',[FrontendController::class,'result_show'])->name('result.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
