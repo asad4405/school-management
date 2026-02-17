@@ -10,4 +10,8 @@ class Resultdetails extends Model
     {
         return $this->belongsTo(Result::class, 'result_id');
     }
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
 }

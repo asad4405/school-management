@@ -58,7 +58,7 @@
                     <div class="col-sm-12 col-md-5">
                         <select name="year" id="year" class="form-control">
                             @foreach ($exam_years as $value)
-                                <option value="{{ $value->exam_year }}" @if($value->exam_year == $result->year) selected @endif>
+                                <option value="{{ $value->exam_year }}" {{ $value->exam_year == optional($result)->year ? 'selected' : '' }}>
                                     {{ $value->exam_year }}</option>
                             @endforeach
                         </select>

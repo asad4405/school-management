@@ -120,9 +120,10 @@ class ResultController extends Controller
             $result->class_id = $student_entollment->class_id;
             $result->section_id = $student_entollment->section_id;
             $result->year = $request->year;
-            $result->full_marks = 0;
+            $result->total_marks = 0;
             $result->avg_gpa = 0;
             $result->avg_grade = 'F';
+            $result->position = null;
             $result->save();
         }
 
@@ -176,14 +177,14 @@ class ResultController extends Controller
 
         $allDetails = Resultdetails::where('result_id', $result->id)->get();
 
-        $totalFullMarks = 0;
+        $totalMarks = 0;
         $totalGpa = 0;
         $subjectCount = $allDetails->count();
         $hasFail = false;
 
         foreach ($allDetails as $d) {
 
-            $totalFullMarks += $d->full_marks;
+            $totalMarks += $d->marks;
             $totalGpa += $d->gpa;
 
             if ($d->grade == 'F') {
@@ -205,8 +206,48 @@ class ResultController extends Controller
             $result->avg_grade = $this->calculateFinalGrade($avgGpa);
         }
 
-        $result->full_marks = $totalFullMarks;
+        $result->total_marks = $totalMarks;
         $result->save();
+
+        // POSITION CALCULATION
+
+        $results = Result::where([
+            'exam_id' => $result->exam_id,
+            'class_id' => $result->class_id,
+            'section_id' => $result->section_id,
+            'year' => $result->year,
+        ])
+            ->orderByDesc('avg_gpa')
+            ->orderByDesc('total_marks')
+            ->get();
+
+        $position = 0;
+        $rank = 0;
+        $lastGpa = null;
+        $lastMarks = null;
+
+        foreach ($results as $res) {
+
+            if ($res->avg_gpa == 0) {
+                $res->position = 'N/A';
+                $res->save();
+                continue;
+            }
+
+            $position++;
+
+            if ($lastGpa === $res->avg_gpa && $lastMarks === $res->total_marks) {
+                $res->position = $rank;
+            } else {
+                $rank = $position;
+                $res->position = $rank;
+            }
+
+            $lastGpa = $res->avg_gpa;
+            $lastMarks = $res->total_marks;
+
+            $res->save();
+        }
 
 
         return redirect()->route('teacher.result.students', $student_entollment->class_id)
@@ -246,12 +287,12 @@ class ResultController extends Controller
 
     private function calculateFinalGrade($gpa)
     {
-        if ($gpa >= 5) return 'A+';
-        elseif ($gpa >= 4) return 'A';
+        if ($gpa >= 5.0) return 'A+';
+        elseif ($gpa >= 4.0) return 'A';
         elseif ($gpa >= 3.5) return 'A-';
-        elseif ($gpa >= 3) return 'B';
+        elseif ($gpa >= 3.0) return 'B';
         elseif ($gpa >= 2.5) return 'C';
-        elseif ($gpa >= 2) return 'D';
+        elseif ($gpa >= 2.0) return 'D';
         else return 'F';
     }
 }

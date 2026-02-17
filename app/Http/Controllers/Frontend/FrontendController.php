@@ -31,9 +31,14 @@ class FrontendController extends Controller
 
     public function result_store(Request $request)
     {
-        // Validate data
+        $exam_id = $request->exam;
+        $year = $request->year;
+        $roll_no = $request->roll_no;
+        $reg_no = $request->reg_no;
+        $class_id = $request->class;
         $result_type = $request->result_type;
 
+        // Validate data
         if ($result_type == 'individual') {
             $request->validate([
                 'exam' => 'required|exists:exams,id',
@@ -42,6 +47,13 @@ class FrontendController extends Controller
                 'reg_no' => 'required|string',
                 'result_type' => 'required',
             ]);
+
+            $student = Student::where('roll_no', $roll_no)
+                ->where('reg_no', $reg_no)
+                ->first();
+            if (!$student || !$student->roll_no || !$student->reg_no) {
+                return back()->with('error', 'No student found with the provided roll number and registration number.');
+            }
         } else {
             $request->validate([
                 'exam' => 'required|exists:exams,id',
@@ -51,32 +63,20 @@ class FrontendController extends Controller
             ]);
         }
 
-
-        $exam_id = $request->exam;
-        $year = $request->year;
-        $roll_no = $request->roll_no;
-        $reg_no = $request->reg_no;
-        $class_id = $request->class;
-        $result_type = $request->result_type;
-
-        $student = Student::where('roll_no', $roll_no)
-            ->where('reg_no', $reg_no)
-            ->first();
-        if(!$student || !$student->roll_no || !$student->reg_no){
-            return back()->with('error', 'No student found with the provided roll number and registration number.');
-        }
-
         if ($result_type == 'individual') {
-            return Result::where('exam_id', $exam_id)
+            $individual_result = Result::where('exam_id', $exam_id)
                 ->where('year', $year)
                 ->where('student_id', $student->id)
-                ->with('resultdetails')
+                ->with('resultdetails', 'student', 'class')
                 ->first();
+            return view('webview.result_show', compact('individual_result','result_type'));
         } else {
-            return Result::where('exam_id', $exam_id)
+            $class_results = Result::where('exam_id', $exam_id)
                 ->where('year', $year)
                 ->where('class_id', $class_id)
-                ->first();
+                ->with('student', 'class')
+                ->get();
+            return view('webview.result_show', compact('class_results','result_type'));
         }
     }
 }
