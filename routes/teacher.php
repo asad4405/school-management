@@ -14,6 +14,8 @@ Route::group(['prefix' => '/teacher'], function () {
     Route::group(['middleware' => 'teacher'], function () {
         // teacher dashboard
         Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('teacher.dashboard');
+        Route::get('/profile', [HomeController::class, 'profile'])->name('teacher.profile');
+        Route::post('/profile/update/{teacher_id}', [HomeController::class, 'profile_update'])->name('teacher.profile.update');
 
         // teacher list
         Route::get('/list', [TeacherController::class, 'teacher_list'])->name('teacher.list');
