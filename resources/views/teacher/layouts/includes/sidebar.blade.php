@@ -12,41 +12,67 @@
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
-                <li class="dropdown">
+                {{-- Home --}}
+                <li class="{{ request()->routeIs('teacher.dashboard') ? 'active' : '' }}">
                     <a href="{{ route('teacher.dashboard') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon bi bi-house"></span><span class="mtext">Home</span>
+                        <span class="micon bi bi-house"></span>
+                        <span class="mtext">Home</span>
                     </a>
                 </li>
-                <li class="dropdown">
+
+                {{-- Teachers --}}
+                <li class="dropdown
+                    {{ request()->routeIs('teacher.list') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-person-video3"></span><span class="mtext">Teachers</span>
+                        <span class="micon bi bi-person-video3"></span>
+                        <span class="mtext">Teachers</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('teacher.list') }}">Teacher List</a></li>
+                        <li class="{{ request()->routeIs('teacher.list') ? 'active' : '' }}">
+                            <a href="{{ route('teacher.list') }}">Teacher List</a>
+                        </li>
                     </ul>
                 </li>
-                <li class="dropdown">
+
+                {{-- Class & Subject --}}
+                <li class="dropdown
+                    {{ request()->routeIs('teacher.assigned.class.subjects') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-easel-fill"></span><span class="mtext">Class & Subject</span>
+                        <span class="micon bi bi-easel-fill"></span>
+                        <span class="mtext">Class & Subject</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('teacher.assigned.class.subjects') }}">Assigned Class Subject</a></li>
+                        <li class="{{ request()->routeIs('teacher.assigned.class.subjects') ? 'active' : '' }}">
+                            <a href="{{ route('teacher.assigned.class.subjects') }}">Assigned Class Subject</a>
+                        </li>
                     </ul>
                 </li>
-                <li class="dropdown">
+
+                {{-- Attendance --}}
+                <li class="dropdown
+                    {{ request()->routeIs('teacher.attendance.*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-calendar-check-fill"></span><span class="mtext">Attendance</span>
+                        <span class="micon bi bi-calendar-check-fill"></span>
+                        <span class="mtext">Attendance</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('teacher.attendance.class') }}">Student Attendance</a></li>
+                        <li class="{{ request()->routeIs('teacher.attendance.class') ? 'active' : '' }}">
+                            <a href="{{ route('teacher.attendance.class') }}">Student Attendance</a>
+                        </li>
                     </ul>
                 </li>
-                <li class="dropdown">
+
+                {{-- Results --}}
+                <li class="dropdown
+                    {{ request()->routeIs('teacher.result.*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-award-fill"></span><span class="mtext">Results</span>
+                        <span class="micon bi bi-award-fill"></span>
+                        <span class="mtext">Results</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('teacher.result.class') }}">Result Entry</a></li>
+                        <li class="{{ request()->routeIs('teacher.result.class') ? 'active' : '' }}">
+                            <a href="{{ route('teacher.result.class') }}">Result Entry</a>
+                        </li>
                     </ul>
                 </li>
                 {{-- <li>
