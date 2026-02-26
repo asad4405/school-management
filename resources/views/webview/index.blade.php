@@ -1,4 +1,5 @@
 @extends('webview.layouts.master')
+@section('title') Home @endsection
 @section('content')
     <!-- Hero Section -->
     <section class="hero text-center py-5">

@@ -1,5 +1,6 @@
 @extends('admin.layouts.master')
 @section('content')
+@section('title') Create Class Subject @endsection
     <div class="main-container">
         <!-- Default Basic Forms Start -->
         <div class="pd-20 card-box mb-30">

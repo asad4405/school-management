@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard</title>
+    <title>@yield('title')</title>
 
     <!-- Site favicon -->
     <link rel="apple-touch-icon" sizes="180x180"

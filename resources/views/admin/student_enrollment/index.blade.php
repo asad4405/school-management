@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title') Student Enrollment List @endsection
 @section('content')
     <div class="main-container">
         <!-- Simple Datatable start -->

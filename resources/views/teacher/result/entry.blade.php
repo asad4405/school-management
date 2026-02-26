@@ -1,4 +1,5 @@
 @extends('teacher.layouts.master')
+@section('title') Result Entry @endsection
 @section('content')
     <div class="main-container">
         <!-- Default Basic Forms Start -->

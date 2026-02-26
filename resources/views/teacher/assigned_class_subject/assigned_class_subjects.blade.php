@@ -1,4 +1,5 @@
 @extends('teacher.layouts.master')
+@section('title') Teacher Assignment Lists @endsection
 @section('content')
     <div class="main-container">
         <!-- Simple Datatable start -->
