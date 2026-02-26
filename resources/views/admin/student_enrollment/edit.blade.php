@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title') Edit Student Enrollment @endsection
 @section('content')
     <div class="main-container">
         <!-- Default Basic Forms Start -->

@@ -1,4 +1,5 @@
 @extends('teacher.layouts.master')
+@section('title') Teacher Profile @endsection
 @section('content')
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
@@ -606,7 +607,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Email</label>
-                                                                <input 
+                                                                <input
                                                                     class="form-control form-control-lg" type="email"
                                                                     name="email" readonly />
                                                             </div>

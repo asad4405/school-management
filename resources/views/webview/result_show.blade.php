@@ -1,4 +1,5 @@
 @extends('webview.layouts.master')
+@section('title') Show Result @endsection
 @section('content')
     @if ($result_type == 'individual')
 

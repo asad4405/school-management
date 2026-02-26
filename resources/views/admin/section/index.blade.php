@@ -1,11 +1,12 @@
 @extends('admin.layouts.master')
+@section('title') Section Lists @endsection
 @section('content')
     <div class="main-container">
         <!-- Simple Datatable start -->
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
                 <div class="my-2 pull-left">
-                    <h4 class="text-blue h4">Class Lists</h4>
+                    <h4 class="text-blue h4">Section Lists</h4>
                 </div>
                 <div class="pull-right">
                     <a href="{{ route('admin.section.create') }}" class="btn btn-primary btn-sm scroll-click"><i

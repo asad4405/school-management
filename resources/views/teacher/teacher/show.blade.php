@@ -1,4 +1,5 @@
 @extends('teacher.layouts.master')
+@section('title') Teacher Profile @endsection
 @section('content')
     <div class="main-container">
         <div class="container py-2">

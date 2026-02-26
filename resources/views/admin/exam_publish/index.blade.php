@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title') Exam Publish Lists @endsection
 @section('content')
     <div class="main-container">
         <!-- Simple Datatable start -->

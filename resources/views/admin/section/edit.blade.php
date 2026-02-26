@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title') Edit Section @endsection
 @section('content')
     <div class="main-container">
         <!-- Default Basic Forms Start -->
