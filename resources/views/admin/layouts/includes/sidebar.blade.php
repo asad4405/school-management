@@ -46,7 +46,8 @@
                 </li>
 
                 {{-- Class & Section --}}
-                <li class="dropdown
+                <li
+                    class="dropdown
                     {{ request()->routeIs('admin.class.*') || request()->routeIs('admin.section.*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon bi bi-easel"></span>
@@ -63,7 +64,8 @@
                 </li>
 
                 {{-- Subject & Class --}}
-                <li class="dropdown
+                <li
+                    class="dropdown
                     {{ request()->routeIs('admin.subject.*') || request()->routeIs('admin.class.subject.*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon bi bi-book-half"></span>
@@ -94,7 +96,8 @@
                 </li>
 
                 {{-- Student Enrollment --}}
-                <li class="dropdown
+                <li
+                    class="dropdown
                     {{ request()->routeIs('admin.student.enrollment.*') || request()->routeIs('admin.exam.*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon bi bi-person-plus"></span>
@@ -111,7 +114,8 @@
                 </li>
 
                 {{-- Exam & Publish --}}
-                <li class="dropdown
+                <li
+                    class="dropdown
                     {{ request()->routeIs('admin.exam.*') || request()->routeIs('admin.exampublish.*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon bi bi-clock-history"></span>
@@ -134,6 +138,22 @@
                         <span class="mtext">Notices</span>
                     </a>
                 </li>
+
+                {{-- api: sms gateway --}}
+                <li
+                    class="dropdown
+                    {{ request()->routeIs('admin.exam.*') || request()->routeIs('admin.exampublish.*') ? 'active open' : '' }}">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon bi bi-code-slash"></span>
+                        <span class="mtext"> Api Integration </span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="{{ request()->routeIs('admin.smsgateway.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.smsgateway.index') }}">Sms Gateway</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li>
                     <div class="sidebar-small-cap">Extra</div>
                 </li>
