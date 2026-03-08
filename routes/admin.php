@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ApiIntegrationController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\ClassSubjectController;
 use App\Http\Controllers\Admin\ExamController;
@@ -58,5 +59,9 @@ Route::group(['prefix' => '/admin'], function () {
 
         // student enrollment
         Route::resource('/notice', NoticeController::class)->names('admin.notice');
+
+        // api: smsgateway
+        Route::get('/sms-gateway',[ApiIntegrationController::class,'sms_gateway'])->name('admin.smsgateway.index');
+        Route::post('/sms-gateway/update',[ApiIntegrationController::class,'sms_gateway_update'])->name('admin.smsgateway.update');
     });
 });
