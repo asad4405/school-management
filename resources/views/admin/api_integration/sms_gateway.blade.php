@@ -12,7 +12,7 @@
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <form action="{{ route('admin.smsgateway.update',$edit_data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.api.smsgateway.update',$edit_data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">url</label>

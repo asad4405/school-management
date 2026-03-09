@@ -148,8 +148,9 @@
                         <span class="mtext"> Api Integration </span>
                     </a>
                     <ul class="submenu">
-                        <li class="{{ request()->routeIs('admin.smsgateway.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.smsgateway.index') }}">Sms Gateway</a>
+                        <li class="{{ request()->routeIs('admin.api.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.api.smsgateway.index') }}">Sms Gateway</a>
+                            <a href="{{ route('admin.api.mailgateway.index') }}">Mail Gateway</a>
                         </li>
                     </ul>
                 </li>
