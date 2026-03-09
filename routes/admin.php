@@ -61,7 +61,10 @@ Route::group(['prefix' => '/admin'], function () {
         Route::resource('/notice', NoticeController::class)->names('admin.notice');
 
         // api: smsgateway
-        Route::get('/sms-gateway',[ApiIntegrationController::class,'sms_gateway'])->name('admin.smsgateway.index');
-        Route::post('/sms-gateway/update',[ApiIntegrationController::class,'sms_gateway_update'])->name('admin.smsgateway.update');
+        Route::get('/sms-gateway',[ApiIntegrationController::class,'sms_gateway'])->name('admin.api.smsgateway.index');
+        Route::post('/sms-gateway/update',[ApiIntegrationController::class,'sms_gateway_update'])->name('admin.api.smsgateway.update');
+
+        Route::get('/mail-gateway',[ApiIntegrationController::class,'mail_gateway'])->name('admin.api.mailgateway.index');
+        Route::post('/mail-gateway/update',[ApiIntegrationController::class,'mail_gateway_update'])->name('admin.api.mailgateway.update');
     });
 });
