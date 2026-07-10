@@ -26,6 +26,7 @@
                             <th class="table-plus datatable-nosort">SL</th>
                             <th>Class Name</th>
                             <th>Subject Name</th>
+                            <th>Section</th>
                             <th>Status</th>
                             <th class="datatable-nosort">Action</th>
                         </tr>
@@ -45,6 +46,7 @@
                                         @endif
                                     @endforeach
                                 </td>
+                                <td>{{ $value->section->section_name }}</td>
                                 <td>
                                     @if ($value->status == 'Active')
                                         <span class="p-1 text-white rounded span bg-success">Active</span>
