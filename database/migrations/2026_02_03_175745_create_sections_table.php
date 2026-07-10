@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id')->constrained()->cascadeOnDelete();
-            $table->string('section_name');
+            $table->string('section_name')->unique();
             $table->integer('position')->nullable();
             $table->string('status')->default('Active');
             $table->timestamps();

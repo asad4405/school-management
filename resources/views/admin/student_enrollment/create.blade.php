@@ -46,7 +46,6 @@
                     <label class="col-sm-12 col-md-2 col-form-label">Section Name</label>
                     <div class="col-sm-12 col-md-10">
                         <select name="section_id" class="form-control select2_section">
-                            <option>Select Section</option>
                             @foreach ($section as $value)
                                 <option value="{{ $value->id }}">{{ $value->section_name }}</option>
                             @endforeach

@@ -48,13 +48,13 @@
                 {{-- Class & Section --}}
                 <li
                     class="dropdown
-                    {{ request()->routeIs('admin.class.*') || request()->routeIs('admin.section.*') ? 'active open' : '' }}">
+                    {{ request()->routeIs('admin.class.index') || request()->routeIs('admin.section.*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon bi bi-easel"></span>
                         <span class="mtext"> Class & Section </span>
                     </a>
                     <ul class="submenu">
-                        <li class="{{ request()->routeIs('admin.class.*') ? 'active' : '' }}">
+                        <li class="{{ request()->routeIs('admin.class.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.class.index') }}">Class</a>
                         </li>
                         <li class="{{ request()->routeIs('admin.section.*') ? 'active' : '' }}">
