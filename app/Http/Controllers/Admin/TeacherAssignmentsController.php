@@ -46,8 +46,17 @@ class TeacherAssignmentsController extends Controller
             'subject_id' => 'required',
         ]);
 
-        if(TeacherAssignment::where('class_id', $request->class_id)->exists()) {
-            return redirect()->back()->with('error', 'Class Already Exists!');
+        $exists = TeacherAssignment::where('class_id', $request->class_id)
+            ->where('section_id', $request->section_id)
+            ->where(function($query) use ($request) {
+                foreach ($request->subject_id as $subject) {
+                    $query->orWhereJsonContains('subject_id', $subject);
+                }
+            })
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->with('error', 'Selected Class, Section, and one or more Subjects already exist!');
         }
 
         $teacher_assignment = new TeacherAssignment();
@@ -65,15 +74,19 @@ class TeacherAssignmentsController extends Controller
 
     public function getSubjects(Request $request)
     {
-        $classSubjects = ClassSubject::where('class_id', $request->class_id)->get();
+        $classSubjects = ClassSubject::where('class_id', $request->class_id)
+                                    ->where('section_id', $request->section_id)
+                                    ->get();
 
         $subject_ids = [];
         foreach ($classSubjects as $cs) {
             $ids = json_decode($cs->subject_id);
-            $subject_ids = array_merge($subject_ids, $ids);
+            if (is_array($ids)) {
+                $subject_ids = array_merge($subject_ids, $ids);
+            }
         }
 
-        $subjects = Subject::whereIn('id', $subject_ids)->get();
+        $subjects = Subject::whereIn('id', array_unique($subject_ids))->get();
         return response()->json($subjects);
     }
 
@@ -110,8 +123,18 @@ class TeacherAssignmentsController extends Controller
             'subject_id' => 'required',
         ]);
 
-        if(TeacherAssignment::where('class_id', $request->class_id)->exists()) {
-            return redirect()->back()->with('error', 'Class Already Exists!');
+        $exists = TeacherAssignment::where('class_id', $request->class_id)
+            ->where('section_id', $request->section_id)
+            ->where('id', '!=', $id) 
+            ->where(function($query) use ($request) {
+                foreach ($request->subject_id as $subject) {
+                    $query->orWhereJsonContains('subject_id', $subject);
+                }
+            })
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->with('error', 'Selected Class, Section, and one or more Subjects already exist!');
         }
 
         $teacher_assignment = TeacherAssignment::findOrFail($id);
