@@ -20,7 +20,7 @@
                         <select name="student_id" class="form-control select2_student">
                             <option>Select Student</option>
                             @foreach ($students as $value)
-                                <option value="{{ $value->id }}">{{ $value->student->name }}</option>
+                                <option value="{{ $value->id }}">{{ $value->student->name }} ({{ $value->student->phone }})</option>
                             @endforeach
                         </select>
                         @error('student_id')

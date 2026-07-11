@@ -15,11 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('admin_id')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string(column: 'student_id')->unique();
-            $table->string('roll_no', 6)->unique();
-            $table->string('reg_no', 10)->unique();
             $table->string(column: 'address')->nullable();
-            $table->string(column: 'class_roll')->nullable();
             $table->string(column: 'gender')->nullable();
             $table->string(column: 'dob')->nullable();
             $table->string(column: 'religion')->nullable();
