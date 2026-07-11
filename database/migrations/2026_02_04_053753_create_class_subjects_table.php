@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('class_id')->constrained()->cascadeOnDelete();
             $table->json('subject_id');
+            $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->integer('position')->nullable();
             $table->string('status')->default('Active');
             $table->timestamps();

@@ -48,13 +48,13 @@
                 {{-- Class & Section --}}
                 <li
                     class="dropdown
-                    {{ request()->routeIs('admin.class.*') || request()->routeIs('admin.section.*') ? 'active open' : '' }}">
+                    {{ request()->routeIs('admin.class.index') || request()->routeIs('admin.section.*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon bi bi-easel"></span>
                         <span class="mtext"> Class & Section </span>
                     </a>
                     <ul class="submenu">
-                        <li class="{{ request()->routeIs('admin.class.*') ? 'active' : '' }}">
+                        <li class="{{ request()->routeIs('admin.class.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.class.index') }}">Class</a>
                         </li>
                         <li class="{{ request()->routeIs('admin.section.*') ? 'active' : '' }}">
@@ -142,14 +142,16 @@
                 {{-- api: sms gateway --}}
                 <li
                     class="dropdown
-                    {{ request()->routeIs('admin.exam.*') || request()->routeIs('admin.exampublish.*') ? 'active open' : '' }}">
+                    {{ request()->routeIs('admin.api.smsgateway*') || request()->routeIs('admin.api.mailgateway*') ? 'active open' : '' }}">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon bi bi-code-slash"></span>
                         <span class="mtext"> Api Integration </span>
                     </a>
                     <ul class="submenu">
-                        <li class="{{ request()->routeIs('admin.api.*') ? 'active' : '' }}">
+                        <li class="{{ request()->routeIs('admin.api.smsgateway*') ? 'active' : '' }}">
                             <a href="{{ route('admin.api.smsgateway.index') }}">Sms Gateway</a>
+                        </li>
+                        <li class="{{ request()->routeIs('admin.api.mailgateway*') ? 'active' : '' }}">
                             <a href="{{ route('admin.api.mailgateway.index') }}">Mail Gateway</a>
                         </li>
                     </ul>

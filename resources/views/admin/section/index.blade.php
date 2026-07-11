@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                             <th class="table-plus datatable-nosort">SL</th>
-                            <th>Class </th>
                             <th>Section </th>
                             <th>Status</th>
                             <th>Position</th>
@@ -35,7 +34,6 @@
                         @foreach ($sections as $value)
                             <tr>
                                 <td class="table-plus">{{ $loop->index + 1 }}</td>
-                                <td>{{ $value->class->class_name }}</td>
                                 <td>{{ $value->section_name }}</td>
                                 <td>
                                     @if ($value->status == 'Active')

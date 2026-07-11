@@ -22,7 +22,7 @@
                         <select class="custom-select col-12 select2_teacher" name="teacher_id" required>
                             <option value="">Select Teacher</option>
                             @foreach ($teachers as $teacher)
-                                <option value="{{ $teacher->id }}" {{ $teacher_assignment->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->teacher->name }}</option>
+                                <option value="{{ $teacher->id }}" {{ $teacher_assignment->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->teacher->name }} - {{ $teacher->teacher_code }} ({{ $teacher->designation }})</option>
                             @endforeach
                         </select>
                         @error('teacher_id')
@@ -36,8 +36,10 @@
                         <select class="custom-select col-12" name="class_id" id="class_id" required>
                             <option value="">Select Class</option>
                             @foreach ($class_subjects as $class)
-                                <option value="{{ $class->class->id }}" {{ $teacher_assignment->class_id == $class->class->id ? 'selected' : '' }}>
-                                    {{ $class->class->class_name }}
+                                <option value="{{ $class->class->id }}"
+                                        data-section="{{ $class->section_id }}"
+                                        {{ $teacher_assignment->class_id == $class->class->id ? 'selected' : '' }}>
+                                    {{ $class->class->class_name }} ({{ $class->section->section_name }})
                                 </option>
                             @endforeach
                         </select>
@@ -48,25 +50,14 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
-                    <div class="col-sm-12 col-md-10">
-                        <select class="form-control select2-multiple" name="subject_id[]" id="subject_id"
-                            multiple="multiple">
-                            <!-- Subjects loaded by JS -->
-                        </select>
-                        @error('subject_id')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Section</label>
                     <div class="col-sm-12 col-md-10">
-                        <select class="custom-select col-12 select2_section" name="section_id" required>
+                        <select class="custom-select col-12 select2_section" name="section_id" id="section_id">
                             <option value="">Select Section</option>
                             @foreach ($sections as $section)
-                                <option value="{{ $section->id }}" {{ $teacher_assignment->section_id == $section->id ? 'selected' : '' }}>{{ $section->section_name }}</option>
+                                <option value="{{ $section->id }}" {{ $teacher_assignment->section_id == $section->id ? 'selected' : '' }}>
+                                    {{ $section->section_name }}
+                                </option>
                             @endforeach
                         </select>
                         @error('section_id')
@@ -75,6 +66,17 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+                    <div class="col-sm-12 col-md-10">
+                        <select class="form-control select2-multiple" name="subject_id[]" id="subject_id" multiple="multiple">
+                            <!-- Subjects loaded by JS -->
+                        </select>
+                        @error('subject_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Position (optional)</label>
@@ -142,43 +144,59 @@
     </script>
 
     <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            // Page load এ subjects load + pre-select
-            function loadSubjects(classId, selectedSubjects = []) {
-                if (classId) {
-                    $.ajax({
-                        url: '{{ route("getClassSubjects") }}',
-                        type: 'GET',
-                        data: { class_id: classId },
-                        success: function (data) {
-                            $('#subject_id').empty();
+        // AJAX dynamic loader process
+        function loadSubjects(classId, sectionId, selectedSubjects = []) {
+            if (classId && sectionId) {
+                $.ajax({
+                    url: '{{ route("getClassSubjects") }}',
+                    type: 'GET',
+                    data: {
+                        class_id: classId,
+                        section_id: sectionId
+                    },
+                    success: function (data) {
+                        $('#subject_id').empty();
 
-                            // Loop over fetched subjects
-                            $.each(data, function (key, subject) {
-                                let selected = selectedSubjects.includes(subject.id) ? 'selected' : '';
-                                $('#subject_id').append('<option value="' + subject.id + '" ' + selected + '>' + subject.subject_name + '</option>');
-                            });
+                        // Match checking setup
+                        $.each(data, function (key, subject) {
+                            let selected = selectedSubjects.includes(subject.id) ? 'selected' : '';
+                            $('#subject_id').append('<option value="' + subject.id + '" ' + selected + '>' + subject.subject_name + '</option>');
+                        });
 
-                            $('#subject_id').trigger('change'); // select2 refresh
-                        }
-                    });
-                } else {
-                    $('#subject_id').empty();
-                }
+                        $('#subject_id').trigger('change');
+                    }
+                });
+            } else {
+                $('#subject_id').empty();
             }
+        }
 
-            let initialClassId = $('#class_id').val();
-            let selectedSubjects = @json(array_map('intval', json_decode($teacher_assignment->subject_id)));
-            loadSubjects(initialClassId, selectedSubjects);
+        let initialClassId = $('#class_id').val();
+        let initialSectionId = $('#section_id').val();
 
-            $('#class_id').change(function () {
-                let classId = $(this).val();
-                loadSubjects(classId);
-            });
+        let selectedSubjects = @json(array_map('intval', json_decode($teacher_assignment->subject_id ?? '[]')));
 
+        if(initialClassId && initialSectionId) {
+            loadSubjects(initialClassId, initialSectionId, selectedSubjects);
+        }
+
+        $('#class_id').change(function () {
+            let classId = $(this).val();
+
+            let sectionId = $(this).find(':selected').data('section');
+
+            if (classId && sectionId) {
+                $('#section_id').val(sectionId).trigger('change');
+                loadSubjects(classId, sectionId);
+            } else {
+                $('#section_id').val('').trigger('change');
+                $('#subject_id').empty();
+            }
         });
-    </script>
+    });
+</script>
 
 
 

@@ -20,7 +20,7 @@
                         <select class="custom-select col-12 select2_teacher" name="teacher_id" required>
                             <option value="">Select Teacher</option>
                             @foreach ($teachers as $teacher)
-                                <option value="{{ $teacher->id }}">{{ $teacher->teacher->name }}</option>
+                                <option value="{{ $teacher->id }}">{{ $teacher->teacher->name }} - {{ $teacher->teacher_code }} ({{ $teacher->designation }})</option>
                             @endforeach
                         </select>
                         @error('teacher_id')
@@ -35,12 +35,27 @@
                         <select class="custom-select col-12" name="class_id" id="class_id" required>
                             <option value="">Select Class</option>
                             @foreach ($class_subjects as $cs)
-                                <option value="{{ $cs->class->id }}">
-                                    {{ $cs->class->class_name }}
+                                <option value="{{ $cs->class_id }}" data-section="{{ $cs->section_id }}">
+                                    {{ $cs->class->class_name }} ({{ $cs->section->section_name }})
                                 </option>
                             @endforeach
                         </select>
                         @error('class_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Section</label>
+                    <div class="col-sm-12 col-md-10">
+                        <select class="custom-select col-12 select2_section" name="section_id" id="section_id">
+                            <option value="">Select Section</option>
+                            @foreach ($sections as $section)
+                                <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+                            @endforeach
+                        </select>
+                        @error('section_id')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -55,22 +70,6 @@
                             <!-- Subjects will be loaded via AJAX -->
                         </select>
                         @error('subject_id')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    <label class="col-sm-12 col-md-2 col-form-label">Section</label>
-                    <div class="col-sm-12 col-md-10">
-                        <select class="custom-select col-12 select2_section" name="section_id" required>
-                            <option value="">Select Section</option>
-                            @foreach ($sections as $section)
-                                <option value="{{ $section->id }}">{{ $section->section_name }}</option>
-                            @endforeach
-                        </select>
-                        @error('section_id')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -141,25 +140,33 @@
 
     <script>
         $('#class_id').change(function () {
-            var classId = $(this).val(); // এখন correct classes.id pathacche
-            if (classId) {
+            var classId = $(this).val();
+
+            var sectionId = $(this).find(':selected').data('section');
+
+            if (classId && sectionId) {
+                $('#section_id').val(sectionId).trigger('change');
+
                 $.ajax({
                     url: '{{ route("getClassSubjects") }}',
                     type: 'GET',
-                    data: { class_id: classId }, // class_subjects এর row খুঁজতে use করব
+                    data: {
+                        class_id: classId,
+                        section_id: sectionId
+                    },
                     success: function (data) {
                         $('#subject_id').empty();
                         $.each(data, function (key, subject) {
                             $('#subject_id').append('<option value="' + subject.id + '">' + subject.subject_name + '</option>');
                         });
-                        $('#subject_id').trigger('change'); // select2 refresh
+                        $('#subject_id').trigger('change');
                     }
                 });
             } else {
+                $('#section_id').val('').trigger('change');
                 $('#subject_id').empty();
             }
         });
-
     </script>
 
 

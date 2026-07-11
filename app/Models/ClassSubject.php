@@ -14,5 +14,9 @@ class ClassSubject extends Model
     {
         return $this->belongsTo(Subject::class, 'subject_id');
     }
+    public function section()
+    {
+        return $this->belongsTo(Section::class, 'section_id');
+    }
 
 }

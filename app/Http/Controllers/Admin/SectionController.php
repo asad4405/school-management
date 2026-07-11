@@ -35,7 +35,7 @@ class SectionController extends Controller
     {
         $request->validate([
             'class_id' => 'required',
-            'section_name' => 'required',
+            'section_name' => 'required|unique:sections,section_name',
         ]);
 
         $section = new Section();
@@ -73,7 +73,7 @@ class SectionController extends Controller
     {
         $request->validate([
             'class_id' => 'required',
-            'section_name' => 'required',
+            'section_name' => 'required|unique:sections,section_name',
         ]);
 
         $section = Section::findOrFail($id);

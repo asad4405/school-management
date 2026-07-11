@@ -30,8 +30,6 @@
                             <th>Name </th>
                             <th>Email </th>
                             <th>Phone </th>
-                            <th>Roll No </th>
-                            <th>Reg No </th>
                             <th>Status</th>
                             <th class="datatable-nosort">Action</th>
                         </tr>
@@ -43,8 +41,6 @@
                                 <td>{{ $value->name }}</td>
                                 <td>{{ $value->email }}</td>
                                 <td>{{ $value->phone }}</td>
-                                <td>{{ $value->student->roll_no }}</td>
-                                <td>{{ $value->student->reg_no }}</td>
                                 <td>
                                     @if ($value->status == 'Active')
                                         <span class="p-1 text-white rounded span bg-success">Active</span>

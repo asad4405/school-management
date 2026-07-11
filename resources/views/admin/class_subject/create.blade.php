@@ -45,6 +45,20 @@
                 </div>
 
                 <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Section Name</label>
+                    <div class="col-sm-12 col-md-10">
+                        <select name="section_id" class="form-control select2_section">
+                            @foreach ($sections as $value)
+                                <option value="{{ $value->id }}">{{ $value->section_name }}</option>
+                            @endforeach
+                        </select>
+                        @error('section_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Position (optional)</label>
                     <div class="col-sm-12 col-md-10">
                         <input class="form-control" name="position" type="number" value="" />

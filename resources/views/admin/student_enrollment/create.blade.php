@@ -20,7 +20,7 @@
                         <select name="student_id" class="form-control select2_student">
                             <option>Select Student</option>
                             @foreach ($students as $value)
-                                <option value="{{ $value->id }}">{{ $value->student->name }}</option>
+                                <option value="{{ $value->id }}">{{ $value->student->name }} ({{ $value->student->phone }})</option>
                             @endforeach
                         </select>
                         @error('student_id')
@@ -46,7 +46,6 @@
                     <label class="col-sm-12 col-md-2 col-form-label">Section Name</label>
                     <div class="col-sm-12 col-md-10">
                         <select name="section_id" class="form-control select2_section">
-                            <option>Select Section</option>
                             @foreach ($section as $value)
                                 <option value="{{ $value->id }}">{{ $value->section_name }}</option>
                             @endforeach

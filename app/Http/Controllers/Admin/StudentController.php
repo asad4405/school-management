@@ -52,18 +52,9 @@ class StudentController extends Controller
 
             // students table insert
 
-            $lastStudent = Student::orderBy('id', 'desc')->lockForUpdate()->first();
-            // Roll No (6 digit)
-            $nextRoll = $lastStudent ? ((int)$lastStudent->roll_no + 1) : 210221;
-            // Reg No (10 digit)
-            $nextReg  = $lastStudent ? ((int)$lastStudent->reg_no + 1) : 2123125029;
-
             $student = new Student();
             $student->admin_id    = auth()->user()->id;
             $student->user_id     = $user_student->id;
-            $student->student_id  = 'ST' . str_pad($user_student->id, 4, '0', STR_PAD_LEFT);
-            $student->roll_no     = (string) $nextRoll;
-            $student->reg_no      = (string) $nextReg;
             $student->issue_date  = $request->issue_date;
             $student->status      = $request->status;
             $student->save();

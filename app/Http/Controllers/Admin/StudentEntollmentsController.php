@@ -43,9 +43,19 @@ class StudentEntollmentsController extends Controller
             'academic_year' => 'required',
         ]);
 
-        if(StudentEntollment::where('student_id',$request->student_id)->where('class_id', $request->class_id)->exists()) {
-            return redirect()->back()->with('error', 'Class Already Exists!');
+        $studentExists = StudentEntollment::where('academic_year', $request->academic_year)
+            ->where('student_id', $request->student_id)
+            ->exists();
+
+        if ($studentExists) {
+            return redirect()->back()->with('error', 'This student is already enrolled in a class for this academic year!');
         }
+
+        $lastStudent = StudentEntollment::orderBy('id', 'desc')->lockForUpdate()->first();
+        // Roll No (6 digit)
+        $nextRoll = $lastStudent ? ((int)$lastStudent->roll_no + 1) : 210221;
+        // Reg No (10 digit)
+        $nextReg  = $lastStudent ? ((int)$lastStudent->reg_no + 1) : 2123125029;
 
         $student_enrollment = new StudentEntollment();
         $student_enrollment->admin_id     = auth()->user()->id;
@@ -53,6 +63,12 @@ class StudentEntollmentsController extends Controller
         $student_enrollment->class_id     = $request->class_id;
         $student_enrollment->section_id   = $request->section_id;
         $student_enrollment->academic_year= $request->academic_year;
+
+        $yearShort = substr($request->academic_year, -2);
+        $student_enrollment->student_code  = 'ST' . $yearShort . str_pad($request->student_id, 4, '0', STR_PAD_LEFT);
+
+        $student_enrollment->roll_no      = (string) $nextRoll;
+        $student_enrollment->reg_no       = (string) $nextReg;
         $student_enrollment->position     = $request->position;
         $student_enrollment->status       = $request->status;
         $student_enrollment->save();
@@ -92,8 +108,13 @@ class StudentEntollmentsController extends Controller
             'academic_year' => 'required',
         ]);
 
-        if(StudentEntollment::where('student_id',$request->student_id)->where('class_id', $request->class_id)->exists()) {
-            return redirect()->back()->with('error', 'Class Already Exists!');
+        $studentExists = StudentEntollment::where('academic_year', $request->academic_year)
+            ->where('student_id', $request->student_id)
+            ->where('id', '!=', $id)
+            ->exists();
+
+        if ($studentExists) {
+            return redirect()->back()->with('error', 'This student is already enrolled in a class for this academic year!');
         }
 
         $student_enrollment = StudentEntollment::findOrFail($id);

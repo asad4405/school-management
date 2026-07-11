@@ -18,6 +18,10 @@ return new class extends Migration
             $table->foreignId('class_id')->constrained()->cascadeOnDelete();
             $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->integer('academic_year');
+            $table->string(column: 'class_roll')->nullable();
+            $table->string(column: 'student_code')->unique();
+            $table->string('roll_no', 6)->unique();
+            $table->string('reg_no', 10)->unique();
             $table->integer('position')->nullable();
             $table->string('status')->default('Active');
             $table->timestamps();

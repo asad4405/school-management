@@ -50,6 +50,21 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Section</label>
+                    <div class="col-sm-12 col-md-10">
+                        <select class="custom-select col-12 select2_section" name="section_id" required>
+                            <option value="">Select Section</option>
+                            @foreach ($sections as $section)
+                                <option value="{{ $section->id }}" {{ $edit_data->section_id == $section->id ? 'selected' : '' }}>{{ $section->section_name }}</option>
+                            @endforeach
+                        </select>
+                        @error('section_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
 
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Position (optional)</label>
