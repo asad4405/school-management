@@ -34,10 +34,10 @@
                             <tr>
                                 <td class="table-plus">{{ $loop->index + 1 }}</td>
                                 <td>{{ $value->student->student->name }}</td>
-                                <td>{{ $value->student->class_roll ?? 'N/A' }}</td>
+                                <td>{{ $value->class_roll ?? 'N/A' }}</td>
                                 <td>{{ $value->student->student->phone }}</td>
-                                <td>{{ $value->student->roll_no }}</td>
-                                <td>{{ $value->student->reg_no }}</td>
+                                <td>{{ $value->roll_no }}</td>
+                                <td>{{ $value->reg_no }}</td>
                                 <td>
                                     <a href="javascript:void(0)" style="display:inline-block; margin-right:10px;" class="p-2 text-white rounded bg-success attendance-btn
                                                {{ $value->attendance?->status === 'Present' ? '' : 'opacity-50' }}"
